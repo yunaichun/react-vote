@@ -1,9 +1,26 @@
-import { expect } from 'chai'; //expect是chai的一种断言语句
-import { List, Map } from 'immutable'; //immutable是一种不变的数据结构【类似数组的slice方法，原数组不变】
+/**
+ * describe和it是mocha测试框架的语法
+ * expect、should和assert是chai是第三方插件chai的语法
+ * immutable是一种不变的数据结构【类似数组的slice方法，原数组不变】
+ */
+import { expect } from 'chai'; 
+import { List, Map } from 'immutable';
 
 import { setEntries, next, vote } from '../src/core';
 
-//测试的描述
+/**
+ * 整个应用的逻辑
+    Map({
+        vote: Map({
+            pair: List.of('Trainspotting', '28 Days Later'),//正在投票的对象
+            tally: Map({
+                Trainspotting': 4, //正在投票对象获得的投票数
+                '28 Days Later': 2 //正在投票对象获得的投票数
+            })
+        }),
+        entries: List.of('Sunshine', 'Millions', '127 Hours')//待投票的条目【获胜方加入进来】
+    })
+ */
 describe('application logic', () => {
     /**
      * [添加投票条目  Map的set调用]
@@ -85,7 +102,7 @@ describe('application logic', () => {
                 entries: List.of('Sunshine') 
             }));
         });
-        //将投票获胜方添加至条目
+        //将投票获胜方添加至条目【将获胜方添加至待投票对象，同时取出待投票对象的前两位】
         it('puts winner of current vote back to entries', () => {
             const state = Map({
                 vote: Map({
@@ -105,13 +122,13 @@ describe('application logic', () => {
                 entries: List.of('127 Hours', 'Trainspotting')
             }));
         });
-        //投票总数相等的情况
+        //投票总数相等的情况【将两者全部添加至待投票对象，同时取出待投票对象的前两位】
         it('puts both from tied vote back to entries', () => {
             const state = Map({
                 vote: Map({
                     pair: List.of('Trainspotting', '28 Days Later'),
                     tally: Map({
-                        'Trainspotting': 3, //相等情况，全部加入entries
+                        'Trainspotting': 3, 
                         '28 Days Later': 3
                     })
                 }),
@@ -125,7 +142,7 @@ describe('application logic', () => {
                 entries: List.of('127 Hours', 'Trainspotting', '28 Days Later')
             }));
         });
-        //只剩下一个条目时【不是形成下一轮投票，而是标明赢家】
+        //只剩下一个条目时【将获胜方添加至待投票对象，此时只剩下一个投票对象，直接表明获胜方】
         it('marks winner when just one entry left', () => {
             const state = Map({
                 vote: Map({

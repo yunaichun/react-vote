@@ -47,8 +47,8 @@ export function next(state) {
 }
 function getWinners(vote) { //将获奖者连接到条目上
     if (!vote) return [];
-    const [a, b] = vote.get('pair'); //即为Trainspotting
-    const aVotes = vote.getIn(['tally', a], 0); //深层嵌套：tally->a，无值则为0
+    const [a, b] = vote.get('pair'); //pair的value与tally的key一一对应
+    const aVotes = vote.getIn(['tally', a], 0); //深层嵌套：pair的value与tally的key一一对应【tally->a，无值则为0】
     const bVotes = vote.getIn(['tally', b], 0);
     if (aVotes > bVotes) return [a];
     else if (aVotes < bVotes) return [b];
