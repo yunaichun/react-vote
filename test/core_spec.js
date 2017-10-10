@@ -43,44 +43,32 @@ describe('application logic', () => {
         //开始投票
         it('creates a tally for the voted entry', () => {
             const state = Map({
-                vote: Map({
-                    pair: List.of('Trainspotting', '28 Days Later')
-                }),
-                entries: List()
+                pair: List.of('Trainspotting', '28 Days Later')
             });
             const nextState = vote(state, 'Trainspotting');
             expect(nextState).to.equal(Map({
-                vote: Map({
-                    pair: List.of('Trainspotting', '28 Days Later'),//投票对象
-                    tally: Map({
-                        'Trainspotting': 1//票数
-                    })
-                }),
-                entries: List()
+                pair: List.of('Trainspotting', '28 Days Later'),//投票对象
+                tally: Map({
+                    'Trainspotting': 1//票数
+                })
             }));
         });
         //再次投票
         it('adds to existing tally for the voted entry', () => {
             const state = Map({
-                vote: Map({
-                    pair: List.of('Trainspotting', '28 Days Later'),
-                    tally: Map({
-                        'Trainspotting': 3,//深层嵌套，自加1
-                        '28 Days Later': 2
-                    })
-                }),
-                entries: List()
+                pair: List.of('Trainspotting', '28 Days Later'),
+                tally: Map({
+                    'Trainspotting': 3,//深层嵌套，自加1
+                    '28 Days Later': 2
+                })
             });
             const nextState = vote(state, 'Trainspotting');
             expect(nextState).to.equal(Map({
-                vote: Map({
-                    pair: List.of('Trainspotting', '28 Days Later'),//投票对象
-                    tally: Map({
-                        'Trainspotting': 4, //票数
-                        '28 Days Later': 2
-                    })
-                }),
-                entries: List()
+                pair: List.of('Trainspotting', '28 Days Later'),//投票对象
+                tally: Map({
+                    'Trainspotting': 4, //票数
+                    '28 Days Later': 2
+                })
             }));
         });
     });

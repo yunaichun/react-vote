@@ -17,9 +17,9 @@ export function setEntries(state, entries) {
  * @param  {[type]} entry [最深层嵌套的key值]
  * @return {[type]}       [将重新updateIn设置的Map返回]
  */
-export function vote(state, entry) {
-    return state.updateIn( //深层嵌套【'vote'->'tally'->entry】
-        ['vote', 'tally', entry],
+export function vote(voteState, entry) {
+    return voteState.updateIn( //深层嵌套【'vote'->'tally'->entry】
+        ['tally', entry],
         0, //entry默认值是0
         tally => tally + 1 //function(entry){entry=entry+1}
     );

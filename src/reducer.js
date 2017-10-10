@@ -15,11 +15,16 @@ export default function reducer(state=INITIAL_STATE, action) {//state=INITIAL_ST
             return setEntries(state, action.entries);//调用此函数其实就是返回一个新state【在core_spec.js可以看出来】
         //执行投票
         case 'VOTE':
-            return vote(state, action.entry)
+            return state.update('vote',voteState => vote(voteState, action.entry));//voteState传入参数state
         //投票决胜
         case 'NEXT':
             return next(state);
     }
     //如果reducer无法识别action的类别，则返回当前状态
     return state;
+}
+
+
+function(voteState){
+    return vote(voteState, action.entry)
 }
