@@ -54,3 +54,6 @@ function getWinners(vote) { //将获奖者连接到条目上
     else if (aVotes < bVotes) return [b];
     else return [a, b];
 }
+
+//初始状态【假如reducer初始状态未定义的情况】
+export const INITIAL_STATE = Map();
