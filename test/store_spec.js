@@ -16,7 +16,7 @@ store：使用reducer函数进行初始化。
  */
 describe('store', () => {
   it('is a Redux store configured with the correct reducer', () => {
-    const store = makeStore();
+    const store = makeStore();//redux模块的createStore是调用了reducer函数。初始情况action是{ type: '@@redux/INIT' }
     expect(store.getState()).to.equal(Map());
     store.dispatch({
       type: 'SET_ENTRIES',
