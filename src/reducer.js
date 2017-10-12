@@ -23,8 +23,3 @@ export default function reducer(state=INITIAL_STATE, action) {//state=INITIAL_ST
     //如果reducer无法识别action的类别，则返回当前状态
     return state;
 }
-
-
-function(voteState){
-    return vote(voteState, action.entry)
-}
