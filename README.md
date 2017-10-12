@@ -8,7 +8,7 @@
 三、使用Nodejs模块socket.io实现客户端和服务端的WebSocket连接;</br>
 四、利用redux保存整个应用的状态。</br>
 
-整体流程：
+整体流程：</br>
 一、客户端向服务器发送指定的action</br>
 二、服务器将操作权交给Redux Store</br>
 三、Redux Store调用reducer[通过dispatch]并且reducer执行与action相关的逻辑。</br>
