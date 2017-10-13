@@ -4,10 +4,13 @@
   "description": "主要功能：投票客户端。[参考地址](http://teropa.info/blog/2015/09/10/full-stack-redux-tutorial.html)",
   "main": "index.js",
   "scripts": {
-     "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js './test/**/*@(.js|.jsx)'",
-     "test:watch": "npm run test -- --watch"
+    "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js './test/**/*@(.js|.jsx)'",
+    "test:watch": "npm run test -- --watch"
   },
-  "repository": "git+https://github.com/ncyu1044173619/React-VoteClient.git",
+  "repository": {
+    "url": "https://github.com/ncyu1044173619/React-VoteClient.git",
+    "type": "git"
+  },
   "keywords": [],
   "author": "wufang <naichunyu@aliyun.com>",
   "license": "ISC",
@@ -20,6 +23,11 @@
     "babel-loader": "^7.1.2",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
+    "chai": "^4.1.2",
+    "chai-immutable": "^1.6.0",
+    "jsdom": "^11.3.0",
+    "mocha": "^4.0.1",
+    "react-hot-loader": "^3.0.0",
     "webpack": "^3.7.1",
     "webpack-dev-server": "^2.9.1"
   },
@@ -30,8 +38,8 @@
     ]
   },
   "dependencies": {
-    "chai": "^4.1.2",
-    "jsdom": "^11.3.0",
-    "mocha": "^4.0.1"
+    "immutable": "^3.8.2",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0"
   }
 }

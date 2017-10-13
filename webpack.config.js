@@ -1,6 +1,9 @@
+var webpack = require('webpack');
+
 module.exports={
 	entry:[
-	'./src/index.js'
+		
+		'./src/index.js'
 	],
 	output:{
 		path:__dirname+'/dist',
@@ -14,10 +17,12 @@ module.exports={
 		loaders:[{
 			test:/\.jsx?$/,
 			exclude:/node_modules/,
-			loader:'babel-loader'
+			loaders: ['react-hot-loader/webpack', 'babel-loader']
 		}]
 	},
+	
 	devServer: {
-	    contentBase: './dist'
+	    contentBase: './dist',
+	    
 	}
 }
