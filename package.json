@@ -4,7 +4,8 @@
   "description": "主要功能：投票客户端。[参考地址](http://teropa.info/blog/2015/09/10/full-stack-redux-tutorial.html)",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+     "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js './test/**/*@(.js|.jsx)'",
+     "test:watch": "npm run test -- --watch"
   },
   "repository": "git+https://github.com/ncyu1044173619/React-VoteClient.git",
   "keywords": [],
@@ -27,5 +28,10 @@
       "es2015",
       "react"
     ]
+  },
+  "dependencies": {
+    "chai": "^4.1.2",
+    "jsdom": "^11.3.0",
+    "mocha": "^4.0.1"
   }
 }
