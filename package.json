@@ -4,6 +4,8 @@
   "description": "主要功能：投票客户端。[参考地址](http://teropa.info/blog/2015/09/10/full-stack-redux-tutorial.html)",
   "main": "index.js",
   "scripts": {
+    "build": "webpack",
+    "dev": "webpack-dev-server",
     "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js './test/**/*@(.js|.jsx)'",
     "test:watch": "npm run test -- --watch"
   },
