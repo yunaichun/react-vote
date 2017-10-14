@@ -15,8 +15,8 @@ global.window = win;
 /**
  * 将jsdom window对象包含的属性放在nodejs环境的document对象中
  */
-Object.keys(window).forEach((key) => {
+Object.keys(global.window).forEach((key) => {
   if (!(key in global)) {
-    global[key] = window[key];
+    global[key] = global.window[key];
   }
 });
