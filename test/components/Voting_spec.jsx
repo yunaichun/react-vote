@@ -4,6 +4,8 @@ import ReactDOM from 'react-dom';
 import ReactTestUtils from 'react-dom/test-utils'; // ES6
 /*引入断言库*/
 import {expect} from 'chai';
+/*引入不可变数据结构immutable*/
+import {List} from 'immutable';
 /*引入测试组件*/
 import Voting from '../../src/components/Voting';
 
@@ -88,8 +90,47 @@ describe('Voting',()=>{
 		expect(buttons.length).to.equal(0);
 
 		const winner = ReactDOM.findDOMNode(component.refs.winner);
-		console.log(winner);
 		expect(winner).to.be.ok; //断言目标是否为真(隐式转换)【节点存在则为true】
 		expect(winner.textContent).to.contain('Trainspotting');
+	});
+	// React组件的渲染函数是一个纯函数，也就是说对于相同的值返回一样的结果同时不影响元素局。【纯组件的话，给可变数据结构的props，改变props，组件不会重新渲染】
+	it('renders as a pure component', () => {
+		const pair = ['Trainspotting', '28 Days Later'];
+		const container = document.createElement('div');//同一个div两次ReactDOM.render可以查看是否重新渲染
+		let component = ReactDOM.render(
+			<Voting pair={pair} />,
+			container
+		);
+		//scryRenderedDOMComponentsWithTag获取渲染的React组件
+		let firstButton = ReactTestUtils.scryRenderedDOMComponentsWithTag(component, 'button')[0];
+		expect(firstButton.textContent).to.equal('Trainspotting');
+
+		pair[0] = 'Sunshine';//不会产生影响
+		component = ReactDOM.render(
+			<Voting pair={pair} />,
+			container
+		);
+		firstButton = ReactTestUtils.scryRenderedDOMComponentsWithTag(component, 'button')[0];
+		expect(firstButton.textContent).to.equal('Trainspotting');
+	});
+	// 不可变数据结构immutable作为组件的prop的属性：组件的属性是不可变的。【纯组件的话，给不可变数据结构的props，改变props，组件会重新渲染】
+	it('does update DOM when prop changes', () => {
+		const pair = List.of('Trainspotting', '28 Days Later');
+		const container = document.createElement('div');//同一个div两次ReactDOM.render可以查看是否重新渲染
+		let component = ReactDOM.render(
+			<Voting pair={pair} />,
+			container
+		);
+		//scryRenderedDOMComponentsWithTag获取渲染的React组件
+		let firstButton = ReactTestUtils.scryRenderedDOMComponentsWithTag(component, 'button')[0];
+		expect(firstButton.textContent).to.equal('Trainspotting');
+
+		const newPair = pair.set(0, 'Sunshine');
+		component = ReactDOM.render(
+			<Voting pair={newPair} />,
+			container
+		);
+		firstButton = ReactTestUtils.scryRenderedDOMComponentsWithTag(component, 'button')[0];
+		expect(firstButton.textContent).to.equal('Sunshine');
 	});
 })

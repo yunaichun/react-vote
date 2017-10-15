@@ -1,5 +1,6 @@
 import React from 'react';
 
+import PureRenderMixin from 'react-addons-pure-render-mixin';
 /**
  * export default 与 export区别
  * 一、export default导出只能有一个
@@ -8,6 +9,7 @@ import React from 'react';
 export default class Voting extends React.Component {
 	constructor(props) {
 	    super(props);
+	    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
 	    this.state = {date: new Date()};
 	  }
 	// 获取父组件传递值pair
