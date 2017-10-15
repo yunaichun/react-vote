@@ -6,6 +6,10 @@ import React from 'react';
  * 二、export可以有多个
  */
 export default class Voting extends React.Component {
+	constructor(props) {
+	    super(props);
+	    this.state = {date: new Date()};
+	  }
 	// 获取父组件传递值pair
 	getPair() {
 		return this.props.pair || [];
@@ -22,7 +26,7 @@ export default class Voting extends React.Component {
 	render(){
 		return <div className="voting">
 			{this.getPair().map(entry =>
-				<button key={entry} disabled={this.isDisabled} onClick={()=>{this.props.vote(entry)}}>
+				<button key={entry} disabled={this.isDisabled()} onClick={()=>{this.props.vote(entry)}}>
 				    <h1>{entry}</h1>
 				    {this.hasVotedFor(entry) ? 
 					    <div className="label">Voted</div> :
