@@ -14,8 +14,8 @@ import Voting from './components/Voting';//投票组件
 ReactDOM.render(
 	<Router >
 		<div>
-			<Route path="/" component={Voting}/>
-			<Route path="/news" component={Results}/>
+			<Route path="/" component={App}/>
+			<Route path="/results" component={App}/>
 		</div>
 	</Router>,
 	document.getElementById('app')
