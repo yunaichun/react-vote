@@ -1,5 +1,4 @@
-/**引入React**/
-import React from 'react';
+/**ReactDOM**/
 import ReactDOM from 'react-dom';
 
 import router  from './components/Router';

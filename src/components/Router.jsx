@@ -1,4 +1,6 @@
-/**此处不引入react-router**/
+/**引入React**/
+import React from 'react';
+/**此处不引入react-router【必须先引入React组件】**/
 import { BrowserRouter, HashRouter, Switch, Route } from 'react-router-dom';
 
 /*引入组件*/
