@@ -2,6 +2,8 @@
  * 接口文档：https://www.npmjs.com/package/jsdom
  */
 import { JSDOM } from 'jsdom';
+import chai from 'chai';
+import chaiImmutable from 'chai-immutable';
 
 const { window } = new JSDOM('<!doctype html><html><body></body></html>');
 const { document } = (new JSDOM('<!doctype html><html><body></body></html>')).window;
@@ -16,3 +18,6 @@ Object.keys(window).forEach((key) => {
     global[key] = window[key];
   }
 });
+
+//在断言库chai中使用expect判断immutable数据结构需要引入此插件
+chai.use(chaiImmutable);
