@@ -6,16 +6,18 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, HashRouter } from 'react-router-dom';
 /**引入Redex**/
 import {createStore} from 'redux';
-/**引入React-Redex：将React组件连接到Redux Store**/
+/**
+ * 引入React-Redex：从Redux Store中获取数据渲染到React组件中
+ * 一、createStore初始化不可变应用状态Redux Store；
+ * 二、Provider将Redux Store与Component连接；
+ * 三、connect将Redux Store状态与Component的Props属性值关联；
+ * 四、通过dispatch改变Redux Store状态；将不可变数据作为输入，完成无状态组件的渲染。
+ */
 import {Provider} from 'react-redux';
 /**引入reducer**/
 import reducer from './reducer';
 /*引入入口组件*/
 import App from './components/App';
-/*引入智能组件*/
-import {VotingContainer} from './components/Voting';
-import {ResultsContainer} from './components/Results';
-
 
 
 /**
@@ -43,7 +45,10 @@ store.dispatch({
 });
 
 
-/*渲染路由组件*/
+/**
+ * 渲染路由组件
+ * Provider：将组件树链接到Redux store。使我们能够稍后对各个组件进行映射。
+ */
 ReactDOM.render(
 	<Provider store={store}>
 		<HashRouter>

@@ -7,7 +7,7 @@ import {expect} from 'chai';
 /*引入不可变数据结构immutable*/
 import {List} from 'immutable';
 /*引入测试组件*/
-import Voting from '../../src/components/Voting';
+import {Voting} from '../../src/components/Voting';
 
 
 /**
