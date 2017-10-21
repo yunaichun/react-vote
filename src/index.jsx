@@ -18,6 +18,16 @@ import {Provider} from 'react-redux';
 import reducer from './reducer';
 /*引入入口组件*/
 import App from './components/App';
+/**
+ * Socket.io库，为跨浏览器工作的WebSockets提供了一个很好的抽象。
+ * 它还有一些不支持WebSockets的客户端的后备机制。
+ * 客户端连接服务端socket操作
+ */
+import io from 'socket.io-client';
+console.log(`${location.protocol}`);
+console.log(`${location.protocol}//${location.hostname}:8090`);
+const socket = io(`${location.protocol}//${location.hostname}:8090`);
+
 
 
 /**
@@ -43,7 +53,6 @@ store.dispatch({
     }
   }
 });
-
 
 /**
  * 渲染路由组件
