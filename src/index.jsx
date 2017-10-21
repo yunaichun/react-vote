@@ -27,6 +27,14 @@ import io from 'socket.io-client';
 console.log(`${location.protocol}`);
 console.log(`${location.protocol}//${location.hostname}:8090`);
 const socket = io(`${location.protocol}//${location.hostname}:8090`);
+/**
+ * 客户端监听'state'事件
+ * 服务端监听到有客户端连接的时候会触发客户端的'state'事件
+ */
+socket.on('state', state => {
+  console.log("来自服务端的state：",state);
+  store.dispatch({type: 'SET_STATE', state})
+});
 
 
 
