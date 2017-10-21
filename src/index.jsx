@@ -32,7 +32,7 @@ const socket = io(`${location.protocol}//${location.hostname}:8090`);
  * 服务端监听到有客户端连接的时候会触发客户端的'state'事件
  */
 socket.on('state', state => {
-  console.log("来自服务端的state：",state);
+  console.log("来自服务端的state：",state);//第二步------来自服务器的newState---------
   store.dispatch({type: 'SET_STATE', state})
 });
 
@@ -54,8 +54,8 @@ const store = createStore(reducer);
 /**通过dispatch调用reducer**/
 store.dispatch({
   type: 'SET_STATE',
-  state: {
-    vote: {
+  state: {//action.state指的是此次操作携带的状态
+    vote: {//第一步------newState变为第二不的初始state---------
       pair: ['Sunshine', '28 Days Later'],
       tally: {Sunshine: 2}
     }

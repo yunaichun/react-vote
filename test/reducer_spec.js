@@ -12,49 +12,115 @@ import reducer from '../src/reducer';
  * 第二个参数是一个实际执行的函数。
  */
 describe('reducer', () => {
-  /**
-   * it：称为"测试用例"（test case），表示一个单独的测试，是测试的最小单位。
-   * 第一个参数是测试用例的名称（"renders a pair of buttons"），
-   * 第二个参数是一个实际执行的函数。
-   */
-  //reducer：找出哪个函数调用并调用它。功能和外界之间有一层间接：action。
-  it('handles SET_STATE', () => {
-    const initialState = Map();
-    const action = {
-		type: 'SET_STATE',
-		state: Map({
-			vote: Map({
-				pair: List.of('Trainspotting', '28 Days Later'),
-				tally: Map({ Trainspotting: 1 })
+	/**
+	* it：称为"测试用例"（test case），表示一个单独的测试，是测试的最小单位。
+	* 第一个参数是测试用例的名称（"renders a pair of buttons"），
+	* 第二个参数是一个实际执行的函数。
+	*/
+	//测试客户端reducer逻辑：SET_STATE【reducer：找出哪个函数调用并调用它。功能和外界之间有一层间接：action】
+	it('handles SET_STATE', () => {
+		const initialState = Map();
+		const action = {
+			type: 'SET_STATE',
+			state: Map({
+				vote: Map({
+					pair: List.of('Trainspotting', '28 Days Later'),
+					tally: Map({ Trainspotting: 1 })
+				})
 			})
-		})
-    };
-    const nextState = reducer(initialState, action);
-    expect(nextState).to.equal(fromJS({
-		vote: {
-			pair: ['Trainspotting', '28 Days Later'],
-			tally: { Trainspotting: 1 }
-		}
-    }));
-  });
-  //不传入初始状态，传入undefined
-  it('handles SET_STATE without initial state', () => {
-    const action = {
-		type: 'SET_STATE',
-			state: {
+		};
+		const nextState = reducer(initialState, action);
+		expect(nextState).to.equal(fromJS({
 			vote: {
 				pair: ['Trainspotting', '28 Days Later'],
 				tally: { Trainspotting: 1 }
 			}
-		}
-    };
-    const nextState = reducer(undefined, action);
+		}));
+	});
+	//测试客户端reducer逻辑：SET_STATE【不传入初始状态】
+	it('handles SET_STATE without initial state', () => {
+		const action = {
+			type: 'SET_STATE',
+				state: {
+				vote: {
+					pair: ['Trainspotting', '28 Days Later'],
+					tally: { Trainspotting: 1 }
+				}
+			}
+		};
+		const nextState = reducer(undefined, action);
 
-    expect(nextState).to.equal(fromJS({
-		vote: {
-			pair: ['Trainspotting', '28 Days Later'],
-			tally: { Trainspotting: 1 }
-		}
-    }));
-  });
+		expect(nextState).to.equal(fromJS({
+			vote: {
+				pair: ['Trainspotting', '28 Days Later'],
+				tally: { Trainspotting: 1 }
+			}
+		}));
+	});
+	//测试客户端reducer逻辑：SET_STATE
+	//------【检查新状态中的条目是否包含用户已经投票的条目】
+	//------【如果没有，我们应该删除hasVoted条目】
+	it('removes hasVoted on SET_STATE if pair changes', () => {
+		const initialState = fromJS({
+			vote: {
+				pair: ['Trainspotting', '28 Days Later'],
+				tally: { Trainspotting: 1 }
+			},
+			hasVoted: 'Trainspotting'
+		});
+		const action = {
+			type: 'SET_STATE',
+			state: {
+				vote: {
+					pair: ['Sunshine', 'Slumdog Millionaire']
+				}
+			}
+		};
+		const nextState = reducer(initialState, action);
+		console.log('xxxxx', nextState);
+		// expect(nextState).to.equal(fromJS({
+		// 	vote: {
+		// 		pair: ['Sunshine', 'Slumdog Millionaire']
+		// 	}
+		// }));
+	});
+
+
+	//测试客户端reducer逻辑：VOTE
+	it('handles VOTE by setting hasVoted', () => {
+		const state = fromJS({
+			vote: { 	
+				pair: ['Trainspotting', '28 Days Later'],
+				tally: { Trainspotting: 1 }
+			}
+		});
+		const action = { type: 'VOTE', entry: 'Trainspotting' };
+		const nextState = reducer(state, action);
+
+		expect(nextState).to.equal(fromJS({
+			vote: {
+				pair: ['Trainspotting', '28 Days Later'],
+				tally: { Trainspotting: 1 }
+			},
+			hasVoted: 'Trainspotting'
+		}));
+	});
+	//测试客户端reducer逻辑：VOTE【加入传的参数没有此条目，不应该计入已投票】
+	it('does not set hasVoted for VOTE on invalid entry', () => {
+		const state = fromJS({
+			vote: {
+				pair: ['Trainspotting', '28 Days Later'],
+				tally: { Trainspotting: 1 }
+			}
+		});
+		const action = { type: 'VOTE', entry: 'Sunshine' };
+		const nextState = reducer(state, action);
+
+		expect(nextState).to.equal(fromJS({
+			vote: {
+				pair: ['Trainspotting', '28 Days Later'],
+				tally: { Trainspotting: 1 }
+			}
+		}));
+	});
 });
