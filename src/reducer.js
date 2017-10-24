@@ -8,7 +8,7 @@ import { setEntries, next, vote ,INITIAL_STATE} from './core';
     return vote(state, voteAction.entry);
  */
 export default function reducer(state=INITIAL_STATE, action) {//state=INITIAL_STATE为了防止传入undefined
-    console.log(state,action);//可以测试数组的reduce方法参数传递
+    console.log('客户端发送的store', state,action);//可以测试数组的reduce方法参数传递
     switch (action.type) {
     	//添加投票条目
         case 'SET_ENTRIES':

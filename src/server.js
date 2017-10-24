@@ -33,9 +33,10 @@ export function startServer(store) {
 	 * Socket.io服务端触发state事件，结果是发送Redux Store的JSON序列化状态给所有连接的Socket.io客户端
 	 */
 	io.on('connection', (socket) => {
+		console.log("有新的socket客户端连接");
 	    socket.emit('state', store.getState().toJS());
 	    /**
-	     * 客户端触发后【客户端发送此"action"】
+	     * 客户端触发后【客户端发送此"action"，store是客户端发送过来的】
 	     * 服务器接收到后【监听"action"事件】，然后去改变服务端Redux Store的状态
 	     */
 	    socket.on('action', store.dispatch.bind(store));//dispatch是调用Redux Stored的reducer
