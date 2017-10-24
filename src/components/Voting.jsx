@@ -51,5 +51,7 @@ function mapStateToProps(state) {
  */
 export const VotingContainer = connect(
 	mapStateToProps,
-	actionCreators//添加actionCreators，子组件可以接收传递的函数。【】
+	//添加actionCreators，子组件可以接收传递的函数；
+	//actionCreators指定type，去调用reducer函数，相当于store.dispatch(actionCreators[xxx](state))。
+	actionCreators
 )(Voting);
