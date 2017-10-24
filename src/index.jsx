@@ -20,8 +20,11 @@ import {Provider} from 'react-redux';
 import reducer from './reducer';
 /*引入action_creater.js【调用reducer，不用传入type参数了】*/
 import { setState } from './action_creators';
+
 /*引入入口组件*/
 import App from './components/App';
+import './style.css';
+
 /**
  * Socket.io库，为跨浏览器工作的WebSockets提供了一个很好的抽象。
  * 它还有一些不支持WebSockets的客户端的后备机制。

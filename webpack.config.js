@@ -13,11 +13,17 @@ module.exports = {
 		filename: 'bundle.js' //打包文件名
 	},
 	module: {
-		loaders: [{
-			test: /\.jsx?$/,
-			exclude: /node_modules/,
-			loaders: ['react-hot-loader/webpack', 'babel-loader']
-		}]
+		loaders: [
+			{
+				test: /\.jsx?$/,
+				exclude: /node_modules/,
+				loaders: ['react-hot-loader/webpack', 'babel-loader']
+			},
+			{ 
+				test: /\.css$/, 
+				loader: ['style-loader', 'css-loader']
+			}
+		]
 	},
 	resolve: { //模块解析规则，提升打包速度
 		extensions: ['.js', '.jsx']
