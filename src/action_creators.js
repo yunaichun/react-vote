@@ -4,16 +4,23 @@
  * 操作创建者还可以方便地记录在给定应用程序中可以调度的所有操作。
  */
 export function setState(state) {
-  return {
-    type: 'SET_STATE',
-    state
-  };
+	return {
+		type: 'SET_STATE',
+		state
+	};
 }
 
 export function vote(entry) {
-  return {
-  	meta: {remote: true},
-    type: 'VOTE',
-    entry
-  };
+	return {
+		meta: { remote: true },
+		type: 'VOTE',
+		entry
+	};
+}
+
+export function next() {
+	return {
+		meta: { remote: true },
+		type: 'NEXT'
+	};
 }

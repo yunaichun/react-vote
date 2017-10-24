@@ -1,7 +1,11 @@
 import React from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import Winner from './Winner';
-
+/**
+ * 引入action_creater.js【调用reducer，不用传入type参数了】
+ * 主要功能是组件本身可以dispatch事件到Redux Store
+ */
+import * as actionCreators from '../action_creators';
 /**
  * 作用：
  * 将Redux Store的状态映射到组件的props属性中
@@ -63,4 +67,9 @@ function mapStateToProps(state) {
  * 【就会将Redux Store与React Component连接】
  * 【将Redux Store状态与Component的Props属性值关联】
  */
-export const ResultsContainer = connect(mapStateToProps)(Results);
+export const ResultsContainer = connect(
+	mapStateToProps,
+	//添加actionCreators，子组件可以接收传递的函数；
+	//actionCreators指定type，去调用reducer函数，相当于store.dispatch(actionCreators[xxx](state))。
+	actionCreators
+)(Results);
