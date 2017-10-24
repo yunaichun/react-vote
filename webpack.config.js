@@ -50,7 +50,7 @@ module.exports = {
 		]
 	},
 	resolve: { //模块解析规则，提升打包速度
-		extensions: ['.js', '.jsx']
+		extensions: ['.js', '.jsx', '.css', '.less']
 	},
 	devServer: {	
 		contentBase: './dist',	//--contentBase指定目录启动服务器的根目录
