@@ -1,5 +1,5 @@
 /*引入不可变数据结构immutable*/
-import { Map } from 'immutable';
+import { List, Map } from 'immutable';
 
 
 /**
@@ -13,6 +13,29 @@ function setState(state, newState) {
 	console.log('新状态：', newState);
 	return state.merge(newState);
 }
+/**
+ * [resetVote 下一轮投票移除hasVoted属性]
+ * @param {[type]} state    [Redex Store初始状态]
+ * @return {[type]} state   [返回最新状态给Redux Store(去除hasVoted属性)]
+ */
+function resetVote(state) {
+	//获取Redux Store的  hasVoted的条目
+	const hasVoted = state.get('hasVoted');
+	//获取准备投票的条目
+	const currentPair = state.getIn(['vote', 'pair'], List());
+	//存在hasVoted标记条目，但是当前setState()不包含此条目，则移除hasVoted属性
+	if (hasVoted && !currentPair.includes(hasVoted)) {
+		return state.remove('hasVoted');
+	} else {
+		return state;
+	}
+}
+/**
+ * [vote 点击投票事件，标记hasVoted]
+ * @param {[type]} state    [Redex Store初始状态]
+ * @param {[type]} entry    [投票条目]
+ * @return {[type]} state   [返回最新状态给Redux Store(标记有hasVoted属性)]
+ */
 function vote(state, entry) {
 	const currentPair = state.getIn(['vote', 'pair']);
 	if (currentPair && currentPair.includes(entry)) {
@@ -31,7 +54,7 @@ export default function reducer(state = Map(), action) {
 	console.log('action到底是啥：', action);
 	switch (action.type) {
 		case 'SET_STATE':
-			return setState(state, action.state);
+			return resetVote(setState(state, action.state));
 		case 'VOTE':
 			return vote(state, action.entry);
 		default:

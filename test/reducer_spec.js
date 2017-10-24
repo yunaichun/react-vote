@@ -77,12 +77,11 @@ describe('reducer', () => {
 			}
 		};
 		const nextState = reducer(initialState, action);
-		console.log('xxxxx', nextState);
-		// expect(nextState).to.equal(fromJS({
-		// 	vote: {
-		// 		pair: ['Sunshine', 'Slumdog Millionaire']
-		// 	}
-		// }));
+		expect(nextState).to.equal(fromJS({
+			vote: {
+				pair: ['Sunshine', 'Slumdog Millionaire']
+			}
+		}));
 	});
 
 
