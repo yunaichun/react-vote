@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
+const autoprefixer = require('autoprefixer');
 
 module.exports = {
 	entry: [
@@ -14,14 +15,37 @@ module.exports = {
 	},
 	module: {
 		loaders: [
+			//jsx+ES6语法解析
 			{
 				test: /\.jsx?$/,
 				exclude: /node_modules/,
 				loaders: ['react-hot-loader/webpack', 'babel-loader']
 			},
-			{ 
-				test: /\.css$/, 
-				loader: ['style-loader', 'css-loader']
+			// CSS和LESS自动补全
+			{
+				test: /\.css|less$/,
+				// 	loader: ['style-loader', 'css-loader']
+				use: [
+					{ loader: 'style-loader' },
+					{ loader: 'css-loader' },
+					{ loader: 'less-loader' },
+					{
+						loader: 'postcss-loader',
+						options: {
+							plugins: () => [autoprefixer(
+								{ 
+									browsers: [
+										'iOS >= 7', 
+										'Android >= 4.1', 
+										'last 10 Chrome versions', 
+										'last 10 Firefox versions', 
+										'Safari >= 6', 'ie > 8'
+									] 
+								}
+							)],
+						},
+					}
+				]
 			}
 		]
 	},

@@ -24,6 +24,7 @@ import { setState } from './action_creators';
 /*引入入口组件*/
 import App from './components/App';
 import './style.css';
+import './style.less';
 
 /**
  * Socket.io库，为跨浏览器工作的WebSockets提供了一个很好的抽象。
