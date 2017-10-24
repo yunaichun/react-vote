@@ -3,7 +3,8 @@ import Winner from './Winner';
 import Vote from './Vote';
 //比较当前的props、state和接下来的props、state，当两者相等的时候返回false，不进行更新
 import PureRenderMixin from 'react-addons-pure-render-mixin';
-
+/*引入action_creater.js【调用reducer，不用传入type参数了】*/
+import * as actionCreators from '../action_creators';
 /**
  * 作用：
  * 将Redux Store的状态映射到组件的props属性中
@@ -48,4 +49,7 @@ function mapStateToProps(state) {
  * 【就会将Redux Store与React Component连接】
  * 【将Redux Store状态与Component的Props属性值关联】
  */
-export const VotingContainer = connect(mapStateToProps)(Voting);
+export const VotingContainer = connect(
+	mapStateToProps,
+	actionCreators//添加actionCreators，子组件可以接收传递的函数。【】
+)(Voting);

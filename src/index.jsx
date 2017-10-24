@@ -16,6 +16,8 @@ import {createStore} from 'redux';
 import {Provider} from 'react-redux';
 /**引入reducer**/
 import reducer from './reducer';
+/*引入action_creater.js【调用reducer，不用传入type参数了】*/
+import { setState } from './action_creators';
 /*引入入口组件*/
 import App from './components/App';
 /**
@@ -33,7 +35,7 @@ const socket = io(`${location.protocol}//${location.hostname}:8090`);
  */
 socket.on('state', state => {
   console.log("来自服务端的state：",state);//第二步------来自服务器的newState---------
-  store.dispatch({type: 'SET_STATE', state})
+  store.dispatch(setState(state));
 });
 
 
