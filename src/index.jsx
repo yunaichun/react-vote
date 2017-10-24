@@ -5,7 +5,9 @@ import ReactDOM from 'react-dom';
 /**此处不引入react-router【必须先引入React组件】**/
 import { BrowserRouter, HashRouter } from 'react-router-dom';
 /**引入Redex**/
-import {createStore} from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+/*-----可以发送action到服务端的中间件-----*/
+import remoteActionMiddleware from './remote_action_middleware';
 /**
  * 引入React-Redex：从Redux Store中获取数据渲染到React组件中
  * 一、createStore初始化不可变应用状态Redux Store；
@@ -52,7 +54,13 @@ store：使用reducer函数进行初始化。
       //获取当前状态
       store.getState();
  */
-const store = createStore(reducer);
+// const store = createStore(reducer);
+const createStoreWithMiddleware = applyMiddleware(
+  remoteActionMiddleware(socket)//中间件：将给定的操作发送到Socket.io连接
+)(createStore);
+const store = createStoreWithMiddleware(reducer);
+
+
 /**通过dispatch调用reducer**/
 store.dispatch({
   type: 'SET_STATE',
