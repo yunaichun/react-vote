@@ -3,7 +3,10 @@ import Winner from './Winner';
 import Vote from './Vote';
 //比较当前的props、state和接下来的props、state，当两者相等的时候返回false，不进行更新
 import PureRenderMixin from 'react-addons-pure-render-mixin';
-/*引入action_creater.js【调用reducer，不用传入type参数了】*/
+/**
+ * 引入action_creater.js【调用reducer，不用传入type参数了】
+ * 主要功能是组件本身可以dispatch事件到Redux Store
+ */
 import * as actionCreators from '../action_creators';
 /**
  * 作用：
@@ -53,5 +56,5 @@ export const VotingContainer = connect(
 	mapStateToProps,
 	//添加actionCreators，子组件可以接收传递的函数；
 	//actionCreators指定type，去调用reducer函数，相当于store.dispatch(actionCreators[xxx](state))。
-	actionCreators
+	actionCreators/*主要功能是组件本身可以dispatch事件到Redux Store*/
 )(Voting);
