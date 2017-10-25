@@ -29,14 +29,13 @@
 5、postcss-loader+autoprefixer</br></br></br>
 
 整体流程：</br></br>
-1、The user clicks a vote button. A VOTE action is dispatched.【用户点击投票按钮，触发客户端 'VOTE' action】</br>
-2、The remote action middleware sends the action over the Socket.io connection.【redux的applyMiddleware配置的socket中间件将'VOTE' action发送到服务器】</br>
-3、The client-side Redux store handles the action, causing the local hasVote state to be set.【客户端处理此'VOTE' action就会将客户端Redux store投票条目标记'hasVoted'】</br>
-4、When the message arrives on the server, the serverside Redux store handles the action, updating the vote in the tally.【服务端处理此'VOTE' action会修改服务端Redux store条目的票数】</br>
-5、The listener on the serverside Redux store broadcasts a state snapshot to all connected clients.【由于服务端subscribe了服务端的Redux Store，一旦Store状态发生改变，就会触发客户端的'state'事件。】
-整体流程：】</br>
-6、A SET_STATE action is dispatched to the Redux store of every connected client.【客户端的监听的'state'事件回调是触发客户端Redux Store的SET_STATE事件】</br>
-7、The Redux store of every connected client handles the SET_STATE action with the updated state from the server.【客户端Redux Store的SET_STATE事件结果是合并服务端Redux Store状态到客户端Redux Store】
+1、The user clicks a vote button. A VOTE action is dispatched.</br>【用户点击投票按钮，触发客户端 'VOTE' action】</br>
+2、The remote action middleware sends the action over the Socket.io connection.</br>【redux的applyMiddleware配置的socket中间件将'VOTE' action发送到服务器】</br>
+3、The client-side Redux store handles the action, causing the local hasVote state to be set.</br>【客户端处理此'VOTE' action就会将客户端Redux store投票条目标记'hasVoted'】</br>
+4、When the message arrives on the server, the serverside Redux store handles the action, updating the vote in the tally.</br>【服务端处理此'VOTE' action会修改服务端Redux store条目的票数】</br>
+5、The listener on the serverside Redux store broadcasts a state snapshot to all connected clients.</br>【由于服务端subscribe了服务端的Redux Store，一旦Store状态发生改变，就会触发客户端的'state'事件。】</br>
+6、A SET_STATE action is dispatched to the Redux store of every connected client.</br>【客户端的监听的'state'事件回调是触发客户端Redux Store的SET_STATE事件】</br>
+7、The Redux store of every connected client handles the SET_STATE action with the updated state from the server.</br>【客户端Redux Store的SET_STATE事件结果是合并服务端Redux Store状态到客户端Redux Store】
 </br></br>
 综上可知：</br>
 服务端Redux Store存储投票条目+条票数</br>
