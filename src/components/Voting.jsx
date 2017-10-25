@@ -18,6 +18,12 @@ import * as actionCreators from '../action_creators';
 import {connect} from 'react-redux';
 
 
+/*引入CSS  module*/
+// import './style.css';
+import '../style.less';
+import style from '../style.scss';
+
+
 /**
  * export default 与 export区别
  * 一、export default导出只能有一个
@@ -30,7 +36,7 @@ export const Voting = class Voting extends React.Component {
 		this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
 	}
 	render(){
-		return <div>
+		return <div className={style.flex}>
 			{this.props.winner ? 
 				<Winner ref="winner" winner={this.props.winner} /> :
 				<Vote {...this.props} />

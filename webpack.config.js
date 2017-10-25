@@ -14,6 +14,9 @@ module.exports = {
 		filename: 'bundle.js' //打包文件名
 	},
 	module: {
+		resolve: { //模块解析规则，提升打包速度
+			extensions: ['.js', '.jsx', '.css', '.less', '.scss']
+		},
 		loaders: [
 			//jsx+ES6语法解析
 			{
@@ -21,14 +24,15 @@ module.exports = {
 				exclude: /node_modules/,
 				loaders: ['react-hot-loader/webpack', 'babel-loader']
 			},
-			// CSS和LESS自动补全
+			// CSS、LESS、SCSS文件加载，浏览器兼容CSS自动补全
 			{
-				test: /\.css|less$/,
+				test: /\.css|less|scss$/,
 				// 	loader: ['style-loader', 'css-loader']
 				use: [
 					{ loader: 'style-loader' },
-					{ loader: 'css-loader' },
+					{ loader: 'css-loader?modules' },
 					{ loader: 'less-loader' },
+					{ loader: 'sass-loader' },
 					{
 						loader: 'postcss-loader',
 						options: {
@@ -39,7 +43,8 @@ module.exports = {
 										'Android >= 4.1', 
 										'last 10 Chrome versions', 
 										'last 10 Firefox versions', 
-										'Safari >= 6', 'ie > 8'
+										'Safari >= 6', 
+										'ie > 8'
 									] 
 								}
 							)],
@@ -48,9 +53,6 @@ module.exports = {
 				]
 			}
 		]
-	},
-	resolve: { //模块解析规则，提升打包速度
-		extensions: ['.js', '.jsx', '.css', '.less']
 	},
 	devServer: {	
 		contentBase: './dist',	//--contentBase指定目录启动服务器的根目录

@@ -14,6 +14,8 @@ import * as actionCreators from '../action_creators';
  *
  */
 import {connect} from 'react-redux';
+/*引入CSS  module*/
+import style from '../style.css';
 
 //纯组件（哑组件）
 export const Results = class Results extends React.Component{
@@ -33,19 +35,19 @@ export const Results = class Results extends React.Component{
 	render() {
 		return this.props.winner ?
 	    <Winner ref="winner" winner={this.props.winner} /> :
-	    <div className="results">
-			<div className="tally">
+	    <div className={style.results}>
+			<div className={style.tally}>
 				{this.getPair().map(entry =>
-					<div key={entry} className="entry">
+					<div key={entry} className={style.entry}>
 					    <h1>{entry}</h1>
-					    <div className="voteCount">
+					    <div className={style.voteCount}>
 				            {this.getVotes(entry)}
 			            </div>
 					</div>
 				)}
 			</div>
-		    <div className="management">
-		        <button ref="next" onClick={this.props.next} className="next">
+		    <div className={style.management}>
+		        <button ref="next" onClick={this.props.next} className={style.next}>
 		            Next
 		        </button>
 		    </div>
