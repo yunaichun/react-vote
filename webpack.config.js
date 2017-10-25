@@ -14,9 +14,6 @@ module.exports = {
 		filename: 'bundle.js' //打包文件名
 	},
 	module: {
-		resolve: { //模块解析规则，提升打包速度
-			extensions: ['.js', '.jsx', '.css', '.less', '.scss']
-		},
 		loaders: [
 			//jsx+ES6语法解析
 			{
@@ -30,7 +27,7 @@ module.exports = {
 				// 	loader: ['style-loader', 'css-loader']
 				use: [
 					{ loader: 'style-loader' },
-					{ loader: 'css-loader?modules' },
+					{ loader: 'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]' },
 					{ loader: 'less-loader' },
 					{ loader: 'sass-loader' },
 					{
@@ -53,6 +50,9 @@ module.exports = {
 				]
 			}
 		]
+	},
+	resolve: { //模块解析规则，提升打包速度
+		extensions: ['.js', '.jsx', '.css', '.less', '.scss']
 	},
 	devServer: {	
 		contentBase: './dist',	//--contentBase指定目录启动服务器的根目录
