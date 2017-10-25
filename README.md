@@ -1,6 +1,6 @@
 #简介
 
-主要功能：投票客户端。[参考地址](http://teropa.info/blog/2015/09/10/full-stack-redux-tutorial.html)，[官方文档-React地址](https://reactjs.org/docs/hello-world.html)，[官方文档-ReactRouter地址](https://reacttraining.com/react-router/web/guides/philosophy)，[官方文档-ReactRedux地址](http://redux.js.org/)。</br>
+主要功能：投票客户端。[参考地址](http://teropa.info/blog/2015/09/10/full-stack-redux-tutorial.html)，[官方文档-React地址](https://reactjs.org/docs/hello-world.html)，[官方文档-ReactRouter地址](https://reacttraining.com/react-router/web/guides/philosophy)，[官方文档-ReactRedux地址](http://redux.js.org/)。</br></br></br>
 
 主要技术：</br>
 一、利用了mocha+chai测试框架;</br>
@@ -26,7 +26,7 @@
 2、css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5</br>
 3、less-loader</br>
 4、sass-loader</br>
-5、postcss-loader+autoprefixer</br></br>
+5、postcss-loader+autoprefixer</br></br></br>
 
 整体流程：</br></br>
 1、The user clicks a vote button. A VOTE action is dispatched.【用户点击投票按钮，触发客户端 'VOTE' action】</br>
