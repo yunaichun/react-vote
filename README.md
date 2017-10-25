@@ -1,6 +1,6 @@
 # 简介
 
-主要功能：投票服务端。[参考地址](http://teropa.info/blog/2015/09/10/full-stack-redux-tutorial.html)
+主要功能：投票服务端。[参考地址](http://teropa.info/blog/2015/09/10/full-stack-redux-tutorial.html)，[官方文档-React地址](https://reactjs.org/docs/hello-world.html)，[官方文档-ReactRouter地址](https://reacttraining.com/react-router/web/guides/philosophy)，[官方文档-ReactRedux地址](http://redux.js.org/)。
 
 主要技术：</br>
 一、利用了mocha+chai测试框架;</br>
