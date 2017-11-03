@@ -1,5 +1,5 @@
 /*引入不可变数据结构immutable*/
-import { List, Map } from 'immutable';
+import { Map } from 'immutable';
 
 
 /**
@@ -19,16 +19,24 @@ function setState(state, newState) {
  * @return {[type]} state   [返回最新状态给Redux Store(去除hasVoted属性)]
  */
 function resetVote(state) {
-	//获取Redux Store的  hasVoted的条目
-	const hasVoted = state.get('hasVoted');
-	//获取准备投票的条目
-	const currentPair = state.getIn(['vote', 'pair'], List());
-	//存在hasVoted标记条目，但是当前setState()不包含此条目，则移除hasVoted属性
-	if (hasVoted && !currentPair.includes(hasVoted)) {
-		return state.remove('hasVoted');
-	} else {
-		return state;
+	// //获取Redux Store的  hasVoted的条目
+	// const hasVoted = state.get('hasVoted');
+	// //获取准备投票的条目
+	// const currentPair = state.getIn(['vote', 'pair'], List());
+	// //存在hasVoted标记条目，但是当前setState()不包含此条目，则移除hasVoted属性
+	// if (hasVoted && !currentPair.includes(hasVoted)) {
+	// 	return state.remove('hasVoted');
+	// }
+	//上一轮投票轮数
+	const votedForRound = state.getIn(['myVote', 'round']);
+	console.log(votedForRound);
+	//当前投票round
+	const currentRound = state.getIn(['vote', 'round']);
+	console.log(currentRound);
+	if (votedForRound !== currentRound) {
+		return state.remove('myVote');
 	}
+	return state;
 }
 /**
  * [vote 点击投票事件，标记hasVoted]
@@ -37,12 +45,15 @@ function resetVote(state) {
  * @return {[type]} state   [返回最新状态给Redux Store(标记有hasVoted属性)]
  */
 function vote(state, entry) {
+	const currentRound = state.getIn(['vote', 'round']);
 	const currentPair = state.getIn(['vote', 'pair']);
 	if (currentPair && currentPair.includes(entry)) {
-		return state.set('hasVoted', entry);
-	} else {
-		return state;
+		return state.set('myVote', Map({
+				round: currentRound,
+				entry
+			}));
 	}
+	return state;
 }
 
 /**
