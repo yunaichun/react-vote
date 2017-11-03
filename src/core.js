@@ -18,11 +18,15 @@ export function setEntries(state, entries) {
  * @return {[type]}       [将重新updateIn设置的Map返回]
  */
 export function vote(voteState, entry) {
-    return voteState.updateIn( //深层嵌套【'vote'->'tally'->entry】
-        ['tally', entry],
-        0, //entry默认值是0
-        tally => tally + 1 //function(entry){entry=entry+1}
-    );
+    if(voteState.get('pair').includes(entry)){
+        return voteState.updateIn( //深层嵌套【'vote'->'tally'->entry】
+            ['tally', entry],
+            0, //entry默认值是0
+            tally => tally + 1 //function(entry){entry=entry+1}
+        );
+    }else{
+        return voteState;
+    }
 }
 
 

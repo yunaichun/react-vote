@@ -71,6 +71,15 @@ describe('application logic', () => {
                 })
             }));
         });
+        it('ignores the vote if for an invalid entry', () => {
+            const state=Map({
+                pair: List.of('Trainspotting', '28 Days Later')
+            });
+            const nextState=vote(state, 'Sunshine');
+            expect(nextState).to.equal(Map({
+                pair: List.of('Trainspotting', '28 Days Later')
+            }));
+        })
     });
     /**
      * [Map的get、take和skip调用]
