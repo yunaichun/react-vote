@@ -1,8 +1,30 @@
-#简介
+# 服务端简介
 
-主要功能：投票客户端。[参考地址](http://teropa.info/blog/2015/09/10/full-stack-redux-tutorial.html)，[官方文档-React地址](https://reactjs.org/docs/hello-world.html)，[官方文档-ReactRouter地址](https://reacttraining.com/react-router/web/guides/philosophy)，[官方文档-ReactRedux地址](http://redux.js.org/)。</br></br></br>
+## 主要功能：
+投票服务端。[参考地址](http://teropa.info/blog/2015/09/10/full-stack-redux-tutorial.html)，[官方文档-React地址](https://reactjs.org/docs/hello-world.html)，[官方文档-ReactRouter地址](https://reacttraining.com/react-router/web/guides/philosophy)，[官方文档-ReactRedux地址](http://redux.js.org/)。
 
-主要技术：</br>
+## 主要技术：
+一、利用了mocha+chai测试框架;</br>
+二、不可变数据结构库imutable.js;</br>
+三、使用Nodejs模块socket.io实现客户端和服务端的WebSocket连接;</br>
+四、利用redux保存整个应用的状态。</br>
+
+## 整体流程：
+一、客户端向服务器发送指定的action</br>
+二、服务器将操作权交给Redux Store</br>
+三、Redux Store调用reducer[通过dispatch]并且reducer执行与action相关的逻辑。</br>
+四、Redux Store更新状态，基于reducer返回的值</br>
+五、Redux Store执行被服务器subscribe订阅的监听函数</br>
+六、服务器发出'state'事件</br>
+七、所有连接的客户端（包括启动原始操作的客户端）接收Redux Store最新的状态</br>
+
+
+#客户端简介
+
+## 主要功能：
+投票客户端[参考地址](http://teropa.info/blog/2015/09/10/full-stack-redux-tutorial.html)，[官方文档-React地址](https://reactjs.org/docs/hello-world.html)，[官方文档-ReactRouter地址](https://reacttraining.com/react-router/web/guides/philosophy)，[官方文档-ReactRedux地址](http://redux.js.org/)。</br></br></br>
+
+## 主要技术：
 一、利用了mocha+chai测试框架;</br>
 二、不可变数据结构库imutable.js;</br>
 三、使用Nodejs模块socket.io-client实现客户端到服务端的通信。</br></br>
@@ -28,7 +50,7 @@
 4、sass-loader</br>
 5、postcss-loader+autoprefixer</br></br></br>
 
-整体流程：</br></br>
+## 整体流程：
 1、The user clicks a vote button. A VOTE action is dispatched.</br>【用户点击投票按钮，触发客户端 'VOTE' action】</br>
 2、The remote action middleware sends the action over the Socket.io connection.</br>【redux的applyMiddleware配置的socket中间件将'VOTE' action发送到服务器】</br>
 3、The client-side Redux store handles the action, causing the local hasVote state to be set.</br>【客户端处理此'VOTE' action就会将客户端Redux store投票条目标记'hasVoted'】</br>
@@ -40,3 +62,4 @@
 综上可知：</br>
 服务端Redux Store存储投票条目+条票数</br>
 客户端Redux Store存储投票条目(刷新就没有了)+接受服务端Redux Store的投票条目、条票数</br>
+
