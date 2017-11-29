@@ -1,6 +1,6 @@
 # 服务端简介
 ### 主要功能：
-投票服务端。(参考地址)[http://teropa.info/blog/2015/09/10/full-stack-redux-tutorial.html]， (官方文档-React地址)[https://reactjs.org/docs/hello-world.html]， (官方文档-ReactRouter地址)[https://reacttraining.com/react-router/web/guides/philosophy]， (官方文档-ReactRedux地址)[https://redux.js.org/]。
+投票服务端。[参考地址](http://teropa.info/blog/2015/09/10/full-stack-redux-tutorial.html)，[官方文档-React地址](https://reactjs.org/docs/hello-world.html)，[官方文档-ReactRouter地址](https://reacttraining.com/react-router/web/guides/philosophy)，[官方文档-ReactRedux地址](http://redux.js.org/)。
 ### 主要技术：
 #### 一、利用了mocha+chai测试框架;
 #### 二、不可变数据结构库imutable.js;
@@ -17,7 +17,7 @@
 
 # 客户端简介
 ### 主要功能：
-投票客户端。
+投票服务端。[参考地址](http://teropa.info/blog/2015/09/10/full-stack-redux-tutorial.html)，[官方文档-React地址](https://reactjs.org/docs/hello-world.html)，[官方文档-ReactRouter地址](https://reacttraining.com/react-router/web/guides/philosophy)，[官方文档-ReactRedux地址](http://redux.js.org/)。
 ### 主要技术：
 #### 一、利用了mocha+chai测试框架;
 #### 二、不可变数据结构库imutable.js;
